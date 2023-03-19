@@ -1,0 +1,20 @@
+﻿<Window x:Class="TemplateGenerator.Views.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TemplateGenerator.Views"
+        xmlns:mvvm="clr-namespace:TemplateGenerator.MVVM"
+        mc:Ignorable="d"
+        Title="Template Generator" Height="720" Width="1080">
+    <Window.DataContext>
+        <mvvm:MainVM/>
+    </Window.DataContext>
+    <DockPanel >
+        <StackPanel DockPanel.Dock="Left" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="Auto" Orientation="Vertical">
+            <Button Command="{Binding ReloadProcessesCommand}" >Reload Processes</Button>
+            <ComboBox SelectedValue="{Binding SelectedService}" ItemsSource="{Binding Services}" DisplayMemberPath="ProcessName" />
+        </StackPanel>
+        <Image DockPanel.Dock="Right" Source="{Binding ProgramCapturedImage}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+    </DockPanel>
+</Window>
