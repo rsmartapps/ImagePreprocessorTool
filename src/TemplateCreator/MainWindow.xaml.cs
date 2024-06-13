@@ -45,6 +45,9 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private BitmapSource _originalImage;
 
+    [ObservableProperty]
+    private BitmapSource _templateImage;
+
     [RelayCommand(CanExecute = nameof(CanTakeScreenshotCommand))]
     public void TakeScreenshot()
     {
@@ -55,6 +58,7 @@ public partial class MainWindowViewModel : ObservableObject
             IntPtr.Zero,
             Int32Rect.Empty,
             BitmapSizeOptions.FromEmptyOptions());
+        TemplateImage = OriginalImage.Clone();
     }
 
     public bool CanTakeScreenshotCommand()
