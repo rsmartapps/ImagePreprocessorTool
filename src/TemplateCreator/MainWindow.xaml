@@ -19,7 +19,7 @@
 				ItemsSource="{Binding Processes}"
                 SelectedItem="{Binding SelectedProcess}" 
                 DisplayMemberPath="ProcessName"/>
-			<Button Margin="5,5,5,5" Content="Screenshot" IsEnabled="{Binding IsProcessSelected}" />
+			<Button Margin="5,5,5,5" Content="Screenshot" Command="{Binding TakeScreenshotCommand}" />
 		</StackPanel>
 	</StackPanel>
 </Window>
