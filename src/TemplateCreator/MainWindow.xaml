@@ -30,6 +30,20 @@
 			<TabItem Header="Original">
 				<Image Source="{Binding OriginalImage}" />
 			</TabItem>
+			<TabItem Header="Template">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<StackPanel Grid.Row="0">
+						<Label>Settings</Label>
+					</StackPanel>
+
+					<Image Grid.Row="1" Source="{Binding TemplateImage}" />
+				</Grid>
+			</TabItem>
 		</TabControl>
 	</Grid>
 </Window>
