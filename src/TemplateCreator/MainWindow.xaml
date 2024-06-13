@@ -12,14 +12,24 @@
         Background="{DynamicResource MaterialDesign.Brush.Background}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-	<StackPanel Margin="5,5,5,5">
-		<StackPanel Orientation="Horizontal">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" Orientation="Horizontal">
 			<ComboBox
+				Margin="5"
 				Text="Select Process"
 				ItemsSource="{Binding Processes}"
                 SelectedItem="{Binding SelectedProcess}" 
                 DisplayMemberPath="ProcessName"/>
-			<Button Margin="5,5,5,5" Content="Screenshot" Command="{Binding TakeScreenshotCommand}" />
+			<Button Margin="5" Content="Screenshot" Command="{Binding TakeScreenshotCommand}" />
 		</StackPanel>
-	</StackPanel>
+		<TabControl Grid.Row="1">
+			<TabItem Header="Original">
+				<Image Source="{Binding OriginalImage}" />
+			</TabItem>
+		</TabControl>
+	</Grid>
 </Window>
