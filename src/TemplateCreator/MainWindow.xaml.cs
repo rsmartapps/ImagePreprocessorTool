@@ -50,7 +50,6 @@ public partial class MainWindowViewModel : ObservableObject
     {
 
         var bmp = WindowCaptureHelper.CaptureClientWindowImage(SelectedProcess);
-        bmp.Save("c:\\dev\\img.jpeg");
         OriginalImage = Imaging.CreateBitmapSourceFromHBitmap(
             bmp.GetHbitmap(),
             IntPtr.Zero,
