@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TemplateCreator\TemplateCreator\TemplateCreator\TemplateCreator.csproj" />
+    <ProjectReference Include="..\..\src\TemplateCreator\TemplateCreator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
