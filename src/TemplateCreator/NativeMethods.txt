@@ -1,0 +1,13 @@
+GetDC
+ReleaseDC
+GetClientRect
+CreateCompatibleDC
+CreateCompatibleBitmap
+BitBlt
+SelectObject
+DeleteDC
+DeleteObject
+SetForegroundWindow
+GetWindowInfo
+GetTitleBarInfo
+IsWindowVisible 
