@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
+using TemplateCreator.Features.Template;
 
 namespace TemplateCreator;
 
@@ -26,6 +27,8 @@ public partial class App : Application
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<TemplateMVVM>();
+            services.AddSingleton<TemplateView>();
 
             //services.AddSingleton<WeakReferenceMessenger>();
             //services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider => provider.GetRequiredService<WeakReferenceMessenger>());

@@ -6,6 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TemplateCreator"
+		xmlns:template="clr-namespace:TemplateCreator.Features.Template"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
 	    FontFamily="{materialDesign:MaterialDesignFont}"
         TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
@@ -31,15 +32,14 @@
 				<Image Source="{Binding OriginalImage}" />
 			</TabItem>
 			<TabItem Header="Template">
+				<template:TemplateView DataContext="{Binding TemplateMVVM}"/>
+			</TabItem>
+			<TabItem Header="Test Result" IsSelected="{Binding IsTestSelected}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="auto"/>
 						<RowDefinition Height="*"/>
 					</Grid.RowDefinitions>
-
-					<StackPanel Grid.Row="0">
-						<Label>Settings</Label>
-					</StackPanel>
 
 					<Image Grid.Row="1" Source="{Binding TemplateImage}" />
 				</Grid>

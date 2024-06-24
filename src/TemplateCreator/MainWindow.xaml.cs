@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using TemplateCreator.Features.Template;
 using TemplateCreator.Features.Windows;
 using Windows.Win32;
 
@@ -30,8 +31,10 @@ public partial class MainWindow : Window
 }
 public partial class MainWindowViewModel : ObservableObject
 {
-    public MainWindowViewModel()
+    public MainWindowViewModel(TemplateMVVM templateMVVM)
     {
+        TemplateMVVM = templateMVVM;
+        templateMVVM.Parent = this;
         Processes = Process.GetProcesses().Where(w => w.MainWindowHandle != IntPtr.Zero && PInvoke.IsWindowVisible(new(w.MainWindowHandle))).OrderBy(p => p.ProcessName).ToList();
     }
 
@@ -46,7 +49,10 @@ public partial class MainWindowViewModel : ObservableObject
     private BitmapSource _originalImage;
 
     [ObservableProperty]
-    private BitmapSource _templateImage;
+    private TemplateMVVM _templateMVVM;
+
+    [ObservableProperty]
+    private bool _isTestSelected;
 
     [RelayCommand(CanExecute = nameof(CanTakeScreenshotCommand))]
     public void TakeScreenshot()
@@ -58,7 +64,7 @@ public partial class MainWindowViewModel : ObservableObject
             IntPtr.Zero,
             Int32Rect.Empty,
             BitmapSizeOptions.FromEmptyOptions());
-        TemplateImage = OriginalImage.Clone();
+        TemplateMVVM.TemplateImage = OriginalImage.Clone();
     }
 
     public bool CanTakeScreenshotCommand()
