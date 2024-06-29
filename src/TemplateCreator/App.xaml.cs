@@ -29,6 +29,7 @@ public partial class App : Application
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<TemplateMVVM>();
             services.AddSingleton<TemplateView>();
+            services.AddSingleton<ROIControl>();
 
             //services.AddSingleton<WeakReferenceMessenger>();
             //services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider => provider.GetRequiredService<WeakReferenceMessenger>());

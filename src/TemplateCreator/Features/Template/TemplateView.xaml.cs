@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using System.Windows.Media.Imaging;
 
 namespace TemplateCreator.Features.Template;
 
@@ -9,39 +10,47 @@ namespace TemplateCreator.Features.Template;
 /// </summary>
 public partial class TemplateView : UserControl
 {
-    private bool isDragging = false;
-    private Point clickPosition;
-
     public TemplateView()
     {
         InitializeComponent();
-    }
 
-    private void Thumb_DragDelta(object sender, DragDeltaEventArgs e)
-    {
-        var vm = (TemplateMVVM)DataContext;
-        vm.ThumbDragDeltaCommand.Execute(e);
     }
 }
 
-public class MoveThumb : Thumb
+
+public partial class TemplateMVVM : ObservableObject
 {
-    public MoveThumb()
+
+    [ObservableProperty]
+    private ROIArea _rOI;
+
+    [ObservableProperty]
+    private float _threshold;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(TestTemplateCommand))]
+    private BitmapSource _templateImage;
+
+    [RelayCommand(CanExecute = nameof(CanTestTemplateCommand))]
+    public void TestTemplate()
+        => Parent.IsTestSelected = true;
+
+    public bool CanTestTemplateCommand()
     {
-        DragDelta += new DragDeltaEventHandler(this.MoveThumb_DragDelta);
+        if (TemplateImage is not null)
+        {
+            return true;
+        }
+        return false;
+
     }
 
-    private void MoveThumb_DragDelta(object sender, DragDeltaEventArgs e)
+    public MainWindowViewModel Parent { get; set; }
+
+    public TemplateMVVM()
     {
-        Control designerItem = this.DataContext as Control;
-
-        if (designerItem != null)
-        {
-            double left = Canvas.GetLeft(designerItem);
-            double top = Canvas.GetTop(designerItem);
-
-            Canvas.SetLeft(designerItem, left + e.HorizontalChange);
-            Canvas.SetTop(designerItem, top + e.VerticalChange);
-        }
+        Threshold = .8f;
+        ROI = new();
     }
 }
+

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="TemplateCreator.Features.Template.ROIControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TemplateCreator.Features.Template"
+             mc:Ignorable="d">
+	<Viewbox Width="{Binding ActualImageWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+			 Height="{Binding ActualImageHeight, RelativeSource={RelativeSource AncestorType=UserControl}}"
+			 >
+		<Border BorderBrush="Blue" BorderThickness="2"
+			Width="{Binding ActualImageWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+			 Height="{Binding ActualImageHeight, RelativeSource={RelativeSource AncestorType=UserControl}}">
+			<Canvas Width="{Binding ActualImageWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+				Height="{Binding ActualImageHeight, RelativeSource={RelativeSource AncestorType=UserControl}}">
+				<Rectangle x:Name="roiRectangle" Stroke="Red" StrokeThickness="2" Fill="Transparent"
+                       Canvas.Left="{Binding Left, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Canvas.Top="{Binding Top, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Width="{Binding ROIWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Height="{Binding ROIHeight, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+
+				<!-- Top-Left Thumb -->
+				<Thumb Width="10" Height="10" DragDelta="DragTopLeft"
+                   Canvas.Left="{Binding Left, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Canvas.Top="{Binding Top, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Background="Black" Cursor="Hand" />
+
+				<!-- Bottom-Right Thumb -->
+				<Thumb Width="10" Height="10" DragDelta="DragBottomRight"
+                   Canvas.Left="{Binding Right, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Canvas.Top="{Binding Bottom, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                   Background="Black" Cursor="ScrollNW" />
+			</Canvas>
+		</Border>
+	</Viewbox>
+	</UserControl>

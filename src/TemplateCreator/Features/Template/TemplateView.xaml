@@ -4,57 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TemplateCreator.Features.Template"
-			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-			 xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:Behaviors="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
-			 xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-			 xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              
 			FontFamily="{materialDesign:MaterialDesignFont}"
 			TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
 			Background="{DynamicResource MaterialDesign.Brush.Background}"
              mc:Ignorable="d">
-	<UserControl.Resources>
-		<!-- MoveThumb Template -->
-		<ControlTemplate x:Key="MoveThumbTemplate" TargetType="{x:Type local:MoveThumb}">
-			<Rectangle Fill="Transparent"/>
-		</ControlTemplate>
-		<!-- ResizeDecorator Template -->
-		<ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
-			<Grid>
-				<s:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
-                          VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-				<s:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
-                          VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-				<s:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
-                          VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-				<s:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
-                          VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
-				<s:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
-                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
-				<s:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
-                          VerticalAlignment="Top" HorizontalAlignment="Right"/>
-				<s:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
-                          VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-				<s:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
-                          VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-			</Grid>
-		</ControlTemplate>
-		<!-- Designer Item Template-->
-		<ControlTemplate x:Key="DesignerItemTemplate" TargetType="ContentControl">
-			<Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
-				<s:MoveThumb Template="{StaticResource MoveThumbTemplate}" Cursor="SizeAll"/>
-				<Control Template="{StaticResource ResizeDecoratorTemplate}"/>
-				<ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
-			</Grid>
-		</ControlTemplate>
-	</UserControl.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
@@ -76,18 +36,18 @@
 			<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Threshold}"  VerticalAlignment="Center" />
 			
 		</Grid>
+		
 		<Image x:Name="templateImage" Grid.Row="1" Source="{Binding TemplateImage}" />
-		<Viewbox  
-			Grid.Row="1" Stretch="None"
-			Width="{Binding ElementName=templateImage, Path=ActualWidth}" 
-            Height="{Binding ElementName=templateImage, Path=ActualHeight}" >
-			<Canvas Width="{Binding ElementName=templateImage, Path=ActualWidth}" 
-                    Height="{Binding ElementName=templateImage, Path=ActualHeight}">
-				<Rectangle Stroke="Red" StrokeThickness="2" DragOver=""/>
-			</Canvas>
-				
-		</Viewbox>
-
-
+		<local:ROIControl 
+			Grid.Row="1"
+			ActualImageHeight="{Binding ElementName=templateImage, Path=ActualHeight}"
+			ActualImageWidth="{Binding ElementName=templateImage, Path=ActualWidth}"
+			Top="{Binding ROI.Top, Mode=TwoWay}"
+			Left="{Binding ROI.Left, Mode=TwoWay}"
+			Bottom="{Binding ROI.Bottom, Mode=TwoWay}"
+			Right="{Binding ROI.Right, Mode=TwoWay}"
+			ROIWidth="{Binding ROI.Width, Mode=OneTime}"
+			ROIHeight="{Binding ROI.Height, Mode=OneWay}"
+			/>
 	</Grid>
 </UserControl>
